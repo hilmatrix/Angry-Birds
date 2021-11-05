@@ -24,6 +24,10 @@ public class TrailController : MonoBehaviour
     public void SetBird(Bird bird) {
         TargetBird = bird;
 
+        ClearTrail();
+    }
+
+    public void ClearTrail() {
         for (int i = 0; i < _trails.Count; i++) {
             Destroy(_trails[i].gameObject);
         }

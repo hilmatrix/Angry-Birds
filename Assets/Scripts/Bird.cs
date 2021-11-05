@@ -15,7 +15,7 @@ public class Bird : MonoBehaviour
 
     public BirdState State { get { return _state; } }
 
-    private BirdState _state;
+    public BirdState _state;
     private float _minVelocity = 0.05f;
     private bool _flagDestroy = false;
 
@@ -25,6 +25,10 @@ public class Bird : MonoBehaviour
         RigidBody.bodyType = RigidbodyType2D.Kinematic;
         Collider.enabled = false;
         _state = BirdState.Idle;
+    }
+
+    public void BaseStart() {
+        Start();
     }
 
     // Update is called once per frame
@@ -68,8 +72,13 @@ public class Bird : MonoBehaviour
     }
 
     void OnDestroy() {
-        if (_state == BirdState.Thrown || _state == BirdState.HitSomething)
+        if (_state == BirdState.Thrown || _state == BirdState.HitSomething) {
             OnBirdDestroyed();
+        }
+    }
+
+    public void BaseDestroy() {
+        OnDestroy();
     }
 
     void OnCollisionEnter2D(Collision2D col) {
